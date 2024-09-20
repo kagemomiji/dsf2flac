@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0' # Runs weekly at midnight on Sunday
 
 jobs:
   analyze:
@@ -31,10 +31,7 @@ jobs:
 
     - name: Build project
       run: |
-        # プロジェクトのビルドコマンドをここに追加
-        # 例: npm install, npm run build
-        # echo "ビルドコマンドをここに追加"
-        apt-get upadate && apt-get install -y autoconf libtool libid3-dev libtag1-dev libflac-dev libflac++-dev libboost-filesystem-dev  libboost-timer-dev libboost-system-dev
+        apt-get update && apt-get install -y autoconf libtool libid3-dev libtag1-dev libflac-dev libflac++-dev libboost-filesystem-dev  libboost-timer-dev libboost-system-dev
         ./autogen.sh
         ./configure
         make
