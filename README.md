@@ -1,6 +1,9 @@
-dsf2flac - ~http://code.google.com/p/dsf2flac/~
+# dsf2flac  
 
-# Introduction
+original project page:
+http://code.google.com/p/dsf2flac/
+
+## Introduction
 A file conversion tool for translating dsf or dff dsd audio files into flac pcm
 audio files.  I originally wrote this because I could not quite find any tool
 which did exactly what I wanted.  I program quite a lot in java and I'm pretty
@@ -11,7 +14,7 @@ versatile/clear way. It should be possible to expand the functionality to add
 other file types quite easily.  If you want to try different convesion filters
 then it should be dead simple: just look in `filters.cpp`.
 
-# Compiling
+## Compiling
 I developed and tested this program on Linux x86_64 with GCC. It probably
 compile and works on x86 GCC too. Windows might be a bit more work.  If you are
 building statically you'll need to link against these libs:
@@ -39,7 +42,7 @@ Simply run `./autogen.sh` if you have GNU autoconf and automake installed. If al
 
 If everything went smoothly, you can now run `make` and `src/dsf2flac` should be generated. By default, the installation prefix is set to `/usr/local`, so `sudo make install` would install it in `/usr/local/bin`. However, the prefix can be overriden using the `configure` script after running `autogen.sh`. Simply run `./configure --prefix=/your/prefix/path`. For more information, please see `./configure --help`
 
-# Running
+## Running
 If you run `dsf2flac -h` you'll get a list of the options.
 
 At the very simplest level you just need to run
@@ -51,19 +54,19 @@ Or you may play file directly via DSD capable sound card
 dsf2flac -d -i "some_audio_file.dsf" -o - 2>/dev/null | ffmpeg -i - -c pcm_s32le  -f alsa hw:1
 ```
 
-# Benchmark
+## Benchmark
 I was quite pleased with the performance.
 For example, with the default filters (which are quite long) the program
 will convert and encode from DSD64 to 24bit 88200Hz flac at around 
 14x realtime on my ageing laptop (Intel Core2Duo P8600 @2.4GHz)
 
-# License
+## License
 Copyright (c) 2013 by respective authors.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License Version 3
 
-# Acknowledgements
+## Acknowledgements
 Many thanks to the following authors and projects whose work has greatly
 helped the development of this tool.
 
