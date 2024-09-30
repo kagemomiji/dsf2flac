@@ -4,7 +4,7 @@
 AC_PREREQ([2.69])
 AC_INIT([dsf2flac], [1.0])
 AC_CONFIG_SRCDIR([src/main.cpp])
-AM_CONFIG_HEADER(config.h)
+AM_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([foreign -Wall])
 AC_LANG(C++)
 AM_PROG_AR
@@ -18,7 +18,7 @@ AC_PROG_CC
 AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG()
 
-AC_HEADER_STDC
+#AC_HEADER_STDC
 
 # Checks for libraries.
 AX_LIB_ID3([],
