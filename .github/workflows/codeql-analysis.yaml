@@ -31,7 +31,7 @@ jobs:
 
     - name: Build project
       run: |
-        apt-get update && apt-get install -y autoconf libtool libid3-dev libtag1-dev libflac-dev libflac++-dev libboost-filesystem-dev  libboost-timer-dev libboost-system-dev gcc g++ libboost-chrono-dev 
+        sudo apt-get update && sudo apt-get install -y autoconf libtool libid3-dev libtag1-dev libflac-dev libflac++-dev libboost-filesystem-dev  libboost-timer-dev libboost-system-dev gcc g++ libboost-chrono-dev 
         ./autogen.sh
         ./configure
         make
