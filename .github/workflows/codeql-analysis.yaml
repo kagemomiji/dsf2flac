@@ -1,0 +1,40 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * 0' # Runs weekly at midnight on Sunday
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: cpp, python
+
+    - name: Build project
+      run: |
+        sudo apt-get update && sudo apt-get install -y autoconf libtool libid3-dev libtag1-dev libflac-dev libflac++-dev libboost-filesystem-dev  libboost-timer-dev libboost-system-dev gcc g++ libboost-chrono-dev 
+        ./autogen.sh
+        ./configure
+        make
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
