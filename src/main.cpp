@@ -35,7 +35,7 @@
  *
  */
 
-#include <boost/timer/timer.hpp>
+#include <boost/chrono.hpp>
 #include <boost/filesystem.hpp>
 #include <FLAC++/metadata.h>
 #include <FLAC++/encoder.h>
@@ -50,11 +50,21 @@
 
 #define flacBlockLen 1024
 
-using boost::timer::cpu_timer;
-using boost::timer::cpu_times;
-using boost::timer::nanosecond_type;
+using boost::chrono::steady_clock;
+using boost::chrono::nanoseconds;
+using boost::chrono::duration_cast;
 
-static nanosecond_type reportInterval(100000000LL);
+// Timer replacement for boost::timer::cpu_timer
+class cpu_timer {
+public:
+	cpu_timer() { start(); }
+	void start() { m_start = steady_clock::now(); }
+	nanoseconds elapsed() const { return duration_cast<nanoseconds>(steady_clock::now() - m_start); }
+private:
+	steady_clock::time_point m_start;
+};
+
+static nanoseconds reportInterval(100000000LL);
 static cpu_timer timer;
 static dsf2flac_float64 lastPos;
 
@@ -76,12 +86,11 @@ void setupTimer(dsf2flac_float64 currPos)
  */
 void checkTimer(dsf2flac_float64 currPos, dsf2flac_float64 percent)
 {
-	cpu_times const elapsed_times(timer.elapsed());
-	nanosecond_type const elapsed(elapsed_times.system + elapsed_times.user);
+	nanoseconds elapsed = timer.elapsed();
 	if (elapsed >= reportInterval) {
 		fprintf(stderr,"\33[2K\r");
-		fprintf(stderr,"Rate: %4.1fx\t",(currPos-lastPos)/elapsed*1000000000);
-		fprintf(stderr,"Progress: %3.0f%%",percent);
+		fprintf(stderr,"Rate: %4.1fx\t", (currPos-lastPos) / (elapsed.count() / 1e9));
+		fprintf(stderr,"Progress: %3.0f%%", percent);
 		fflush(stderr);
 		lastPos = currPos;
 		timer = cpu_timer();
