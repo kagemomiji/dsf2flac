@@ -27,7 +27,8 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: cpp, python
+        languages: cpp
+        build-mode: manual
 
     - name: Build project
       run: |
