@@ -32,7 +32,9 @@ jobs:
           libboost-system-dev \
           gcc \
           g++ \
-          libboost-chrono-dev 
+          libboost-chrono-dev \
+          ffmpeg \
+          flac
 
       # execute build script
       - name: Build project
