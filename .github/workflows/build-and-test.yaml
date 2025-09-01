@@ -19,8 +19,8 @@ jobs:
       # install dependencies
       - name: Install dependencies
         run: |
-          sudo apt-get update 
-          sudo apt-get install -y \
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
           autoconf \
           libtool \
           libid3-dev \
@@ -32,9 +32,7 @@ jobs:
           libboost-system-dev \
           gcc \
           g++ \
-          libboost-chrono-dev \
-          ffmpeg \
-          flac
+          libboost-chrono-dev 
 
       # execute build script
       - name: Build project
@@ -44,6 +42,13 @@ jobs:
           make
 
       # execute test script
+      - name: Install test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+          flac \
+          ffmpeg
+
       - name: Run tests
         run: |
           chmod +x ./test/test.sh
