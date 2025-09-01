@@ -166,7 +166,7 @@ bool DsdiffFileReader::readNextBlock() {
 				errorMsg = "dsfFileReader::readNextBlock:file read error";
 				ok = false;
 			}
-		} else if (file.read_uint8(sampleBuffer,chanNum*sampleBufferLenPerChan)) {
+		} else if (file.read_uint8(sampleBuffer, static_cast<stream_size>(chanNum) * sampleBufferLenPerChan)) {
 			errorMsg = "dsfFileReader::readNextBlock:file read error";
 			ok = false;
 		}
