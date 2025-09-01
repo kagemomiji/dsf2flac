@@ -87,7 +87,7 @@ static void *MemoryAllocate(int NrOfElements, int SizeOfElement)
     fprintf(stderr,"ERROR: not enough memory available!\n\n");
   }
   #else
-  if ((Array = _mm_malloc(NrOfElements * SizeOfElement, 16)) == NULL) 
+  if ((Array = _mm_malloc((size_t)NrOfElements * SizeOfElement, 16)) == NULL) 
   {
     fprintf(stderr,"ERROR: not enough memory available!\n\n");
   }
