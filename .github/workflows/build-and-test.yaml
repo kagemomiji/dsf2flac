@@ -54,7 +54,7 @@ jobs:
           ./test/test.sh
 
       - name: Upload dsf2flac binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dsf2flac
           path: ./src/dsf2flac
